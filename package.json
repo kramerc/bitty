@@ -25,7 +25,6 @@
     "express-session": "^1.6.1",
     "github": "^0.2.1",
     "method-override": "^2.0.2",
-    "minimist": "^0.2.0",
     "morgan": "^1.1.1",
     "passport": "^0.2.0",
     "passport-github": "^0.1.5"
