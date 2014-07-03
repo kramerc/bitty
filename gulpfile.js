@@ -57,6 +57,8 @@ gulp.task('build', ['wiredep', 'html', 'jshint'], function () {
     .pipe(gulp.dest(paths.build.dir));
 });
 
+gulp.task('heroku:production', ['build']);
+
 gulp.task('html', ['styles'], function () {
   var searchPath = '{' + paths.tmp.dir + ',' + paths.app.dir + '}';
 
