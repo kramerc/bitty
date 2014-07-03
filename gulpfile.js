@@ -27,6 +27,9 @@ var paths = {
     styles: {
       dir: 'app/styles',
       entry: 'app/styles/app.scss'
+    },
+    templates: {
+      glob: 'app/templates/**/*.html'
     }
   },
   bower: {
@@ -49,7 +52,10 @@ var paths = {
 
 gulp.task('default', ['build']);
 
-gulp.task('build', ['wiredep', 'html', 'jshint']);
+gulp.task('build', ['wiredep', 'html', 'jshint'], function () {
+  return gulp.src(paths.app.templates.glob, {base: paths.app.dir})
+    .pipe(gulp.dest(paths.build.dir));
+});
 
 gulp.task('html', ['styles'], function () {
   var searchPath = '{' + paths.tmp.dir + ',' + paths.app.dir + '}';
