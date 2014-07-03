@@ -22,6 +22,8 @@
   "unused": true,
   "trailing": true,
   "globals": {
-    "angular": false
+    "angular": false,
+    "hljs": false,
+    "marked": false
   }
 }

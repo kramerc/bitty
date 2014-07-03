@@ -5,6 +5,14 @@
   "license": "MIT",
   "dependencies": {
     "angular": "~1.2.19",
-    "angular-ui-router": "~0.2.10"
+    "angular-marked": "~0.0.12",
+    "angular-resource": "~1.2.19",
+    "angular-sanitize": "~1.2.19",
+    "angular-ui-router": "~0.2.10",
+    "highlightjs": "~8.0.0",
+    "marked": "1c188ebb55ef512653e03b0a03e60d7209a3bc73"
+  },
+  "resolutions": {
+    "marked": "1c188ebb55ef512653e03b0a03e60d7209a3bc73"
   }
 }

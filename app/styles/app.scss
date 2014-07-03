@@ -2,3 +2,28 @@ body {
   font-family: 'Lucida Grande', Arial, Helvetica, sans-serif;
   font-size: 14px;
 }
+
+.markdown {
+  ul li {
+    margin: 4px 0;
+  }
+
+  pre {
+    background-color: #F8F8F8;
+    border: 1px solid #CCCCCC;
+    border-radius: 4px;
+    overflow: auto;
+    padding: 8px;
+
+    code {
+      border: 0;
+    }
+  }
+
+  code {
+    background-color: #F8F8F8;
+    border: 1px solid #CCCCCC;
+    border-radius: 4px;
+    padding: 0 4px;
+  }
+}
