@@ -20,5 +20,8 @@
   "strict": true,
   "undef": true,
   "unused": true,
-  "trailing": true
+  "trailing": true,
+  "globals": {
+    "angular": false
+  }
 }

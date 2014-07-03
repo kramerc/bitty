@@ -58,6 +58,7 @@ gulp.task('html', ['styles'], function () {
     .pipe(plugins.useref.assets({searchPath: searchPath})
       .on('error', gutil.log))
     .pipe(plugins.useref.restore())
+    .pipe(plugins.if('*.js', plugins.ngmin()))
     .pipe(plugins.if('*.js', plugins.uglify({preserveComments: 'some'})))
     .pipe(plugins.if('*.css', plugins.csso()))
     .pipe(plugins.useref())

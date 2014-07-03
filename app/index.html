@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="bitty">
 <head>
   <title>Bitty</title>
 
@@ -10,10 +10,12 @@
   <!-- endbuild -->
 </head>
 <body>
-  <h1>Bitty</h1>
+  <div ui-view></div>
 
   <!-- build:js assets/app.js -->
   <!-- bower:js -->
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
   <!-- endbower -->
   <script src="scripts/app.js"></script>
   <!-- endbuild -->
