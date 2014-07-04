@@ -3,32 +3,33 @@
   <div marked="file.content"></div>
 </div>
 
-<div class="comments" ng-repeat="comment in comments">
-  <div>
-    <a href="https://gist.github.com/{{comment.user.login}}"><img class="avatar" ng-src="{{comment.user.avatar_url}}" alt="{{comment.user.login}}"></a>
-    <div class="comment">
-      <div class="meta"><a href="https://gist.github.com/{{comment.user.login}}">{{comment.user.login}}</a> commented <span am-time-ago="comment.created_at"></span></div>
-      <div class="body" marked="comment.body"></div>
-    </div>
-    <div class="clearfix"></div>
-  </div>
-</div>
-
-<div class="post-comment">
-  <div ng-show="currentUser">
-    <a href="https://gist.github.com/{{currentUser.login}}"><img class="avatar" ng-src="{{currentUser.avatar_url}}" alt="{{currentUser.login}}"></a>
-    <div class="comment">
-      <div class="body">
-        <form>
-          <textarea ng-model="comment.body" placeholder="Leave a comment..."></textarea>
-          <button ng-click="postComment()" ng-disabled="!comment.body.length">Comment</button>
-        </form>
+<div ng-show="config.comments">
+  <div class="comments" ng-repeat="comment in comments">
+    <div>
+      <a href="https://gist.github.com/{{comment.user.login}}"><img class="avatar" ng-src="{{comment.user.avatar_url}}" alt="{{comment.user.login}}"></a>
+      <div class="comment">
+        <div class="meta"><a href="https://gist.github.com/{{comment.user.login}}">{{comment.user.login}}</a> commented <span am-time-ago="comment.created_at"></span></div>
+        <div class="body" marked="comment.body"></div>
       </div>
+      <div class="clearfix"></div>
     </div>
-    <div class="clearfix"></div>
   </div>
-  <div class="not-logged-in" ng-hide="currentUser">
-    <button ng-click="logIn()">Log in with GitHub</button> to comment or leave one directly on <a href="https://gist.github.com/{{gist.id}}">GitHub Gist</a>.
+
+  <div class="post-comment">
+    <div ng-show="currentUser">
+      <a href="https://gist.github.com/{{currentUser.login}}"><img class="avatar" ng-src="{{currentUser.avatar_url}}" alt="{{currentUser.login}}"></a>
+      <div class="comment">
+        <div class="body">
+          <form>
+            <textarea ng-model="comment.body" placeholder="Leave a comment..."></textarea>
+            <button ng-click="postComment()" ng-disabled="!comment.body.length">Comment</button>
+          </form>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    <div class="not-logged-in" ng-hide="currentUser">
+      <button ng-click="logIn()">Log in with GitHub</button> to comment or leave one directly on <a href="https://gist.github.com/{{gist.id}}">GitHub Gist</a>.
+    </div>
   </div>
 </div>
-
