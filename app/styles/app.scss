@@ -3,6 +3,11 @@ body {
   font-size: 14px;
 }
 
+.container {
+  margin: 0 auto;
+  max-width: 960px;
+}
+
 .markdown {
   ul li {
     margin: 4px 0;
