@@ -36,4 +36,30 @@ angular.module('bitty', [
       return hljs.highlightAuto(code).value;
     }
   });
-}).run();
+}).run(function ($rootScope, $http, $timeout, $window) {
+  function getSession() {
+    $http.get('/sessions/info')
+      .success(function (user) {
+        $rootScope.currentUser = user;
+      });
+  }
+
+  getSession();
+
+  $rootScope.logIn = function () {
+    var authWindow = $window.open(
+      '/auth/github', 'AuthWindow', 'dialog=1,location=0,width=1024,height=768');
+
+    function watchWindow() {
+      if (authWindow.window) {
+        if (authWindow.window.location.pathname === '/') {
+          getSession();
+          authWindow.window.close();
+        }
+        $timeout(watchWindow, 500);
+      }
+    }
+    $timeout(watchWindow, 500);
+  };
+
+});

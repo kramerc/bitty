@@ -13,3 +13,22 @@
     <div class="clearfix"></div>
   </div>
 </div>
+
+<div class="post-comment">
+  <div ng-show="currentUser">
+    <a href="https://gist.github.com/{{currentUser.login}}"><img class="avatar" ng-src="{{currentUser.avatar_url}}" alt="{{currentUser.login}}"></a>
+    <div class="comment">
+      <div class="body">
+        <form>
+          <textarea ng-model="comment.body" placeholder="Leave a comment..."></textarea>
+          <button ng-click="postComment()" ng-disabled="!comment.body.length">Comment</button>
+        </form>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <div class="not-logged-in" ng-hide="currentUser">
+    <button ng-click="logIn()">Log in with GitHub</button> to comment or leave one directly on <a href="https://gist.github.com/{{gist.id}}">GitHub Gist</a>.
+  </div>
+</div>
+
