@@ -6,6 +6,7 @@
   "dependencies": {
     "angular": "~1.2.19",
     "angular-marked": "~0.0.12",
+    "angular-moment": "~0.7.1",
     "angular-resource": "~1.2.19",
     "angular-sanitize": "~1.2.19",
     "angular-ui-router": "~0.2.10",

@@ -3,6 +3,7 @@
 'use strict';
 
 angular.module('bitty', [
+  'angularMoment',
   'ngResource',
   'ngSanitize',
   'ui.router',

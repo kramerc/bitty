@@ -27,3 +27,46 @@ body {
     padding: 0 4px;
   }
 }
+
+.comments {
+  > div {
+    margin: 16px 0;
+
+    img.avatar {
+      float: left;
+      width: 48px;
+    }
+
+    div.comment {
+      border: 1px solid #CCCCCC;
+      border-radius: 8px;
+      margin-left: 56px;
+
+      .meta {
+        background-color: #EEEEEE;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        border-bottom: 1px solid #CCCCCC;
+        padding: 8px;
+
+        a {
+          color: inherit;
+          font-weight: bold;
+          text-decoration: none;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+
+      .body {
+        padding: 0 8px;
+      }
+    }
+  }
+}
+
+div.clearfix {
+  clear: both;
+}
