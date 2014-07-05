@@ -1,6 +1,19 @@
-<p ng-show="config.description">{{gist.description}}</p>
-<div class="markdown" ng-repeat="file in gist.files">
-  <div marked="file.content"></div>
+<div class="gist">
+  <p ng-show="config.description">{{gist.description}}</p>
+  <div class="markdown" ng-repeat="file in gist.files">
+    <div marked="file.content"></div>
+  </div>
+
+  <p class="meta">
+    <a href="https://gist.github.com/{{gist.user.login}}">{{gist.user.login}}</a>
+    created this <span am-time-ago="gist.created_at"></span>
+    <span ng-hide="gist.created_at === gist.updated_at">
+      and was last updated <span am-time-ago="gist.updated_at"></span>
+    </span>
+    <span ng-show="gist.user.login === currentUser.login">
+      &mdash; <a href="#">Edit</a>
+    </span>
+  </p>
 </div>
 
 <div ng-show="config.comments">

@@ -11,9 +11,16 @@
   }
 }
 
-.markdown {
-  ul li {
-    margin: 4px 0;
+.gist {
+  .markdown {
+    ul li {
+      margin: 4px 0;
+    }
+  }
+
+  .meta {
+    color: #999999;
+    font-size: 12px;
   }
 }
 
