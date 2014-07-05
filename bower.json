@@ -12,7 +12,8 @@
     "angular-sanitize": "~1.2.19",
     "angular-ui-router": "~0.2.10",
     "highlightjs": "~8.0.0",
-    "marked": "https://github.com/chjj/marked/archive/master.zip"
+    "marked": "https://github.com/chjj/marked/archive/master.zip",
+    "octicons": "~2.1.0"
   },
   "resolutions": {
     "marked": "e-tag:1c188ebb5"

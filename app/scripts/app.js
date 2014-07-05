@@ -48,7 +48,7 @@ angular.module('bitty', [
 
   $rootScope.layout = layout;
 
-  $rootScope.logIn = function () {
+  $rootScope.signIn = function () {
     var authWindow = $window.open(
       '/auth/github', 'AuthWindow', 'dialog=1,location=0,width=1024,height=768');
 
@@ -62,6 +62,13 @@ angular.module('bitty', [
       }
     }
     $timeout(watchWindow, 500);
+  };
+
+  $rootScope.signOut = function () {
+    $http.delete('/sessions')
+      .success(function () {
+        $rootScope.currentUser = null;
+      });
   };
 
 });

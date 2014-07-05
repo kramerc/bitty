@@ -1,5 +1,16 @@
 @import '../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap';
 
+.navbar.navbar-default {
+  img.avatar {
+    border-radius: 2px;
+    width: 18px;
+  }
+
+  a, a span {
+    cursor: pointer;
+  }
+}
+
 .markdown {
   ul li {
     margin: 4px 0;
@@ -60,7 +71,7 @@
     }
   }
 
-  > div.not-logged-in {
+  > div.not-signed-in {
     margin-left: 56px;
   }
 }
