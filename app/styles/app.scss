@@ -1,63 +1,8 @@
-@mixin top-gradient($color1, $color2) {
-  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from($color1), to($color2));
-  background: -webkit-linear-gradient(top, $color1, $color2);
-  background: -moz-linear-gradient(top, $color1, $color2);
-  background: -ms-linear-gradient(top, $color1, $color2);
-  background: -o-linear-gradient(top, $color1, $color2);
-  background: linear-gradient(top, $color1, $color2);
-}
-
-body {
-  font-family: 'Lucida Grande', Arial, Helvetica, sans-serif;
-  font-size: 14px;
-}
-
-.container {
-  margin: 0 auto;
-  max-width: 960px;
-}
-
-button {
-  @include top-gradient(#FFFFFF, #EFEFEF);
-  border: 1px solid #CCCCCC;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 12px;
-  margin-bottom: 16px;
-  outline: 0;
-  padding: 6px 8px;
-
-  &:hover:not([disabled]){
-    @include top-gradient(#EFEFEF, #CCCCCC);
-  }
-
-  &:active:not([disabled]){
-    @include top-gradient(#CCCCCC, #EFEFEF);
-  }
-}
+@import '../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap';
 
 .markdown {
   ul li {
     margin: 4px 0;
-  }
-
-  pre {
-    background-color: #F8F8F8;
-    border: 1px solid #CCCCCC;
-    border-radius: 4px;
-    overflow: auto;
-    padding: 8px;
-
-    code {
-      border: 0;
-    }
-  }
-
-  code {
-    background-color: #F8F8F8;
-    border: 1px solid #CCCCCC;
-    border-radius: 4px;
-    padding: 0 4px;
   }
 }
 
@@ -74,6 +19,10 @@ button {
       border: 1px solid #CCCCCC;
       border-radius: 8px;
       margin-left: 56px;
+
+      p {
+        margin: 1em 0;
+      }
 
       .meta {
         background-color: #EEEEEE;
@@ -99,21 +48,14 @@ button {
     }
 
     form {
-      margin-bottom: -4px;
+      margin-bottom: 9px;
       text-align: right;
 
       textarea {
-        border: 1px solid #CCCCCC;
-        border-top-left-radius: 4px;
-        border-top-right-radius: 4px;
-        box-sizing: border-box;
-        box-shadow: inset 0 1px 2px #EFEFEF;
-        font-size: 14px;
         height: 100px;
         margin: 8px 4px 8px 0;
         padding: 8px;
         resize: none;
-        width: 100%;
       }
     }
   }

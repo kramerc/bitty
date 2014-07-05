@@ -36,7 +36,7 @@ angular.module('bitty', [
       return hljs.highlightAuto(code).value;
     }
   });
-}).run(function ($rootScope, $http, $timeout, $window) {
+}).run(function ($rootScope, $http, $timeout, $window, layout) {
   function getSession() {
     $http.get('/sessions/info')
       .success(function (user) {
@@ -45,6 +45,8 @@ angular.module('bitty', [
   }
 
   getSession();
+
+  $rootScope.layout = layout;
 
   $rootScope.logIn = function () {
     var authWindow = $window.open(
