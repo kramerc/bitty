@@ -4,7 +4,7 @@
     <div marked="file.content"></div>
   </div>
 
-  <p class="meta">
+  <p class="meta" ng-show="config.meta">
     <a href="https://gist.github.com/{{gist.user.login}}">{{gist.user.login}}</a>
     created this <span am-time-ago="gist.created_at"></span>
     <span ng-hide="gist.created_at === gist.updated_at">

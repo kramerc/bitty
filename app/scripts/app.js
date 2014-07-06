@@ -7,6 +7,7 @@ angular.module('bitty', [
   'ngResource',
   'ngSanitize',
   'ui.ace',
+  'ui.bootstrap',
   'ui.router',
   'hc.marked'
 ]).config(function ($locationProvider, $stateProvider, $urlRouterProvider, markedProvider) {

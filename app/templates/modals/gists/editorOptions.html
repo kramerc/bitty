@@ -1,0 +1,48 @@
+<div class="modal-header">
+  <h4 class="modal-title">Options</h4>
+</div>
+<div class="modal-body">
+  <form>
+    <h4>Bitty</h4>
+    <p>These options affect how this gist is displayed on Bitty. A <code>bitty.json</code> file is placed in the gist to store these.</p>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" ng-model="config.description">
+        Show gist description
+      </label>
+    </div>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" ng-model="config.comments">
+        Show GitHub Gist comments
+      </label>
+    </div>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" ng-model="config.meta">
+        Show meta
+      </label>
+    </div>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" ng-model="config.navbar">
+        Show the navigation bar
+      </label>
+    </div>
+
+    <h4>GitHub Gist</h4>
+    <div class="form-group">
+      <label class="sr-only" for="gistDescription">Gist description</label>
+      <input id="gistDescription" class="form-control" placeholder="Gist description" ng-model="gist.description">
+    </div>
+    <div class="checkbox" ng-hide="gist.id">
+      <label>
+        <input type="checkbox" ng-model="config.public">
+        Make this gist public
+      </label>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-primary" ng-click="set()">Set</button>
+</div>
