@@ -60,7 +60,7 @@ gulp.task('build', ['wiredep', 'fonts', 'html', 'jshint'], function () {
 gulp.task('heroku:production', ['build']);
 
 gulp.task('fonts', function () {
-  return plugins.bowerFiles()
+  plugins.bowerFiles()
     .pipe(plugins.filter('**/*.{eot,svg,ttf,woff}'))
     .pipe(plugins.flatten())
     .pipe(gulp.dest(paths.build.assets.dir));
