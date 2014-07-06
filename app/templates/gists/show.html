@@ -6,6 +6,7 @@
 
   <p class="meta" ng-show="config.meta">
     <a href="https://gist.github.com/{{gist.user.login}}">{{gist.user.login}}</a>
+    <span ng-hide="gist.user.login">anonymous</span>
     created this <span am-time-ago="gist.created_at"></span>
     <span ng-hide="gist.created_at === gist.updated_at">
       and was last updated <span am-time-ago="gist.updated_at"></span>
