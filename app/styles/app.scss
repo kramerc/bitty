@@ -19,6 +19,15 @@ body.editor {
       font-size: 20px;
       font-weight: bold;
     }
+
+    div.user {
+      display: block;
+      padding: 7px 14px;
+    }
+
+    a {
+      cursor: pointer;
+    }
   }
 
   div.editor-box {
