@@ -13,10 +13,15 @@
     "angular-ui-ace": "~0.1.1",
     "angular-ui-router": "~0.2.10",
     "highlightjs": "~8.0.0",
-    "marked": "https://github.com/chjj/marked/archive/master.zip",
+    "marked": "~0.3.2",
     "octicons": "~2.1.0"
   },
-  "resolutions": {
-    "marked": "e-tag:1c188ebb5"
+  "overrides": {
+    "ace-builds": {
+      "main": "src-noconflict/ace.js"
+    },
+    "marked": {
+      "main": "lib/marked.js"
+    }
   }
 }
