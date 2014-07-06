@@ -12,9 +12,9 @@
   <link rel="stylesheet" href="styles/app.css">
   <!-- endbuild -->
 </head>
-<body>
+<body ng-class="{editor: layout.editor}">
   <nav class="navbar navbar-default navbar-static-top" role="navigation" ng-show="layout.navbar">
-    <div class="container">
+    <div ng-class="{container: !layout.fluid, 'container-fluid': layout.fluid}">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle"collapse" data-target="#bs-top-navbar-collapse">
           <span class="sr-only">Toggle navigation</span>
@@ -34,7 +34,7 @@
               <span ng-bind="currentUser.login"></span>
             </a>
           </li>
-          <li><a href="#"><span class="octicon octicon-plus"></span></a></li>
+          <li><a ui-sref="gist.editor.new"><span class="octicon octicon-plus"></span></a></li>
           <li><a ng-click="signOut()"><span class="octicon octicon-sign-out"></span></a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right" ng-if="!currentUser">
@@ -43,9 +43,13 @@
       </div>
     </div>
   </nav>
-  <div class="container" ui-view></div>
+  <div ng-class="{container: !layout.fluid, 'container-fluid': layout.fluid}" ui-view></div>
 
   <!-- build:js assets/app.js -->
+  <!-- deps wiredep could not inject -->
+  <script src="bower_components/ace-builds/src-noconflict/ace.js"></script>
+  <!-- end -->
+
   <!-- bower:js -->
   <script src="bower_components/jquery/dist/jquery.js"></script>
   <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/affix.js"></script>
@@ -67,11 +71,15 @@
   <script src="bower_components/angular-moment/angular-moment.js"></script>
   <script src="bower_components/angular-resource/angular-resource.js"></script>
   <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+  <script src="bower_components/angular-ui-ace/ui-ace.js"></script>
   <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
   <script src="bower_components/highlightjs/highlight.pack.js"></script>
   <!-- endbower -->
+
   <script src="scripts/app.js"></script>
   <script src="scripts/controllers/gists.js"></script>
+  <script src="scripts/directives/editorBox.js"></script>
+  <script src="scripts/directives/resize.js"></script>
   <script src="scripts/services/Comment.js"></script>
   <script src="scripts/services/Gist.js"></script>
   <script src="scripts/services/layout.js"></script>

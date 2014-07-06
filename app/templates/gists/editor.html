@@ -1,0 +1,14 @@
+<form>
+  <div class="editor-controls">
+    <div class="name pull-left">
+      <span ng-show="gist.id">gist:{{gist.id}}</span>
+      <span ng-hide="gist.id">New Gist</span>
+    </div>
+    <div class="btn-group pull-right">
+      <button class="btn btn-primary" ng-click="save()">Save</button>
+    </div>
+  </div>
+
+  <div editor-box>
+  </div>
+</form>

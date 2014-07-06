@@ -11,7 +11,7 @@
       and was last updated <span am-time-ago="gist.updated_at"></span>
     </span>
     <span ng-show="gist.user.login === currentUser.login">
-      &mdash; <a href="#">Edit</a>
+      &mdash; <a ui-sref="gist.editor.edit({id: gist.id})">Edit</a>
     </span>
   </p>
 </div>

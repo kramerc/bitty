@@ -6,6 +6,7 @@ angular.module('bitty', [
   'angularMoment',
   'ngResource',
   'ngSanitize',
+  'ui.ace',
   'ui.router',
   'hc.marked'
 ]).config(function ($locationProvider, $stateProvider, $urlRouterProvider, markedProvider) {
@@ -19,11 +20,27 @@ angular.module('bitty', [
     })
     .state('gist', {
       abstract: true,
-      url: '/:id',
+      url: '',
       template: '<ui-view>'
     })
-    .state('gist.show', {
+    .state('gist.editor', {
+      abstract: true,
+      controller: 'GistEditorCtrl',
       url: '',
+      template: '<ui-view>'
+    })
+    .state('gist.editor.new', {
+      url: '/new',
+      controller: 'NewGistCtrl',
+      templateUrl: 'templates/gists/editor.html'
+    })
+    .state('gist.editor.edit', {
+      url: '/:id/edit',
+      controller: 'EditGistCtrl',
+      templateUrl: 'templates/gists/editor.html'
+    })
+    .state('gist.show', {
+      url: '/:id',
       templateUrl: 'templates/gists/show.html',
       controller: 'ShowGistCtrl'
     });

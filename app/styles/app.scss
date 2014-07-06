@@ -1,5 +1,43 @@
 @import '../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap';
 
+body.editor {
+  > nav {
+    margin-bottom: 0;
+  }
+
+  > div.container-fluid {
+    padding: 0;
+    width: 100%;
+  }
+
+  div.editor-controls {
+    border-bottom: 1px solid #CCCCCC;
+    overflow: hidden;
+    padding: 8px;
+
+    div.name {
+      font-size: 20px;
+      font-weight: bold;
+    }
+  }
+
+  div.editor-box {
+    div.ace_editor {
+      float: left;
+      width: 50%;
+    }
+
+    div.preview {
+      border-left: 1px solid #CCCCCC;
+      display: block;
+      float: left;
+      overflow: auto;
+      padding: 16px;
+      width: 50%;
+    }
+  }
+}
+
 .navbar.navbar-default {
   img.avatar {
     border-radius: 2px;
