@@ -28,18 +28,16 @@
       <div class="collapse navbar-collapse" id="bs-top-navbar-collapse">
         <ul class="nav navbar-nav">
         </ul>
-        <ul class="nav navbar-nav navbar-right" ng-if="currentUser">
-          <li>
+        <ul class="nav navbar-nav navbar-right">
+          <li ng-if="currentUser">
             <a href="https://gist.github.com/{{currentUser.login}}">
               <img class="avatar" ng-src="{{currentUser.avatar_url}}">
               <span ng-bind="currentUser.login"></span>
             </a>
           </li>
-          <li><a ui-sref="gist.editor.new"><span class="octicon octicon-plus"></span></a></li>
-          <li><a ng-click="signOut()"><span class="octicon octicon-sign-out"></span></a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right" ng-if="!currentUser">
-          <li><a ng-click="signIn()">Sign in with GitHub</a></li>
+          <li><a ui-sref="gist.editor.new"><span class="octicon octicon-plus"></span> New</a></li>
+          <li><a ng-click="signOut()" ng-if="currentUser"><span class="octicon octicon-sign-out"></span> Sign out</a></li>
+          <li><a ng-click="signIn()" ng-if="!currentUser"><span class="octicon octicon-sign-in"></span> Sign in with GitHub</a></li>
         </ul>
       </div>
     </div>
