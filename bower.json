@@ -22,6 +22,15 @@
     },
     "marked": {
       "main": "lib/marked.js"
+    },
+    "octicons": {
+      "main": [
+        "octicons/octicons.css",
+        "octicons/octicons.eot",
+        "octicons/octicons.svg",
+        "octicons/octicons.ttf",
+        "octicons/octicons.woff"
+      ]
     }
   }
 }

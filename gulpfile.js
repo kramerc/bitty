@@ -52,12 +52,19 @@ var paths = {
 
 gulp.task('default', ['build']);
 
-gulp.task('build', ['wiredep', 'html', 'jshint'], function () {
+gulp.task('build', ['wiredep', 'fonts', 'html', 'jshint'], function () {
   return gulp.src(paths.app.templates.glob, {base: paths.app.dir})
     .pipe(gulp.dest(paths.build.dir));
 });
 
 gulp.task('heroku:production', ['build']);
+
+gulp.task('fonts', function () {
+  return plugins.bowerFiles()
+    .pipe(plugins.filter('**/*.{eot,svg,ttf,woff}'))
+    .pipe(plugins.flatten())
+    .pipe(gulp.dest(paths.build.assets.dir));
+});
 
 gulp.task('html', ['styles'], function () {
   var searchPath = '{' + paths.tmp.dir + ',' + paths.app.dir + '}';
