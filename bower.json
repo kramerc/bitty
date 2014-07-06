@@ -18,7 +18,11 @@
   },
   "overrides": {
     "ace-builds": {
-      "main": "src-noconflict/ace.js"
+      "main": [
+        "src-noconflict/ace.js",
+        "src-noconflict/mode-markdown.js",
+        "src-noconflict/snippets/markdown.js"
+      ]
     },
     "marked": {
       "main": "lib/marked.js"
