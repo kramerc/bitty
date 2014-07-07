@@ -15,6 +15,25 @@ angular.module('bitty')
     $scope.defaultFilename = 'bit.md';
     $scope.configFilename = 'bitty.json';
   })
+  .controller('GistNoUserCtrl', function ($state, $stateParams, Gist) {
+    Gist.get({id: $stateParams.id}, function (gist) {
+      var login = 'anonymous';
+      var newState = 'gist.show';
+
+      if (gist.user) {
+        login = gist.user.login;
+      }
+
+      if ($state.current.name === 'gist.editNoUser') {
+        newState = 'gist.editor.edit';
+      }
+
+      $state.go(newState, {
+        user: login,
+        id: gist.id
+      });
+    });
+  })
   .controller('GistEditorCtrl', function ($scope, $modal, $window, layout) {
     layout.editor = true;
     layout.fluid = true;

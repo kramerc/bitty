@@ -36,13 +36,21 @@ angular.module('bitty', [
       controller: 'NewGistCtrl',
       templateUrl: 'templates/gists/editor.html'
     })
-    .state('gist.editor.edit', {
+    .state('gist.noUser', {
+      url: '/:id',
+      controller: 'GistNoUserCtrl'
+    })
+    .state('gist.editNoUser', {
       url: '/:id/edit',
+      controller: 'GistNoUserCtrl'
+    })
+    .state('gist.editor.edit', {
+      url: '/:user/:id/edit',
       controller: 'EditGistCtrl',
       templateUrl: 'templates/gists/editor.html'
     })
     .state('gist.show', {
-      url: '/:id',
+      url: '/:user/:id',
       templateUrl: 'templates/gists/show.html',
       controller: 'ShowGistCtrl'
     });
