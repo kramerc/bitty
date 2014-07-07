@@ -67,12 +67,36 @@ angular.module('bitty')
       });
     };
   })
-  .controller('EditGistCtrl', function ($scope, $state, $stateParams, Gist) {
+  .controller('EditGistCtrl', function ($scope, $state, $stateParams, Gist, alert) {
     var firstFile;
 
     Gist.get({
       id: $stateParams.id
     }, function (gist) {
+      if ($scope.currentUser && gist.user &&
+          gist.user.login !== $scope.currentUser.login) {
+        $state.go('gist.show', {id: gist.id});
+        alert.emit({
+          msg: 'You are not the owner of this gist.',
+          type: 'danger'
+        });
+        return;
+      } else if (!gist.user) {
+        $state.go('gist.show', {id: gist.id});
+        alert.emit({
+          msg: 'Sorry, anonymous gists cannot be edited.',
+          type: 'danger'
+        });
+        return;
+      } else if (!$scope.currentUser) {
+        $state.go('gist.show', {id: gist.id});
+        alert.emit({
+          msg: 'You need to be signed in to edit gists.',
+          type: 'danger'
+        });
+        return;
+      }
+
       Object.keys(gist.files).every(function (file) {
         if (file !== 'bitty.json') {
           firstFile = file;

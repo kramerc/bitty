@@ -42,6 +42,13 @@
       </div>
     </div>
   </nav>
+
+  <div ng-class="{container: !layout.fluid, 'container-fluid': layout.fluid}" ng-controller="AlertsCtrl">
+    <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">
+      <span ng-bind="alert.msg"></span>
+    </alert>
+  </div>
+
   <div ng-class="{container: !layout.fluid, 'container-fluid': layout.fluid}" ui-view></div>
 
   <!-- build:js assets/app.js -->
@@ -76,12 +83,14 @@
   <!-- endbower -->
 
   <script src="scripts/app.js"></script>
+  <script src="scripts/controllers/alerts.js"></script>
   <script src="scripts/controllers/confirm.js"></script>
   <script src="scripts/controllers/gists.js"></script>
   <script src="scripts/directives/editorBox.js"></script>
   <script src="scripts/directives/resize.js"></script>
   <script src="scripts/services/Comment.js"></script>
   <script src="scripts/services/Gist.js"></script>
+  <script src="scripts/services/alert.js"></script>
   <script src="scripts/services/layout.js"></script>
   <!-- endbuild -->
 </body>
