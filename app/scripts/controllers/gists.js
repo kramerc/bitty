@@ -43,7 +43,7 @@ angular.module('bitty')
     $scope.config = config;
     $scope.gist = gist;
 
-    $scope.set = function () {
+    $scope.close = function () {
       $modalInstance.close();
     };
   })
