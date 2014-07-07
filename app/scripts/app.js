@@ -21,6 +21,7 @@ angular.module('bitty', [
     })
     .state('gist', {
       abstract: true,
+      controller: 'GistCtrl',
       url: '',
       template: '<ui-view>'
     })

@@ -3,11 +3,7 @@
 'use strict';
 
 angular.module('bitty')
-  .controller('GistEditorCtrl', function ($scope, $modal, $window, layout) {
-    layout.editor = true;
-    layout.fluid = true;
-    layout.navbar = false;
-
+  .controller('GistCtrl', function ($scope) {
     $scope.config = {
       description: true,
       comments: false,
@@ -15,6 +11,14 @@ angular.module('bitty')
       navbar: true,
       public: true
     };
+
+    $scope.defaultFilename = 'bit.md';
+    $scope.configFilename = 'bitty.json';
+  })
+  .controller('GistEditorCtrl', function ($scope, $modal, $window, layout) {
+    layout.editor = true;
+    layout.fluid = true;
+    layout.navbar = false;
 
     $scope.back = function () {
       $window.history.back();
@@ -48,16 +52,18 @@ angular.module('bitty')
     };
   })
   .controller('NewGistCtrl', function ($scope, $state, Gist) {
+    var bitFile = $scope.defaultFilename;
+    var configFile = $scope.configFilename;
+
     $scope.gist = new Gist({
-      files: {
-        'bit.md': {},
-        'bitty.json': {}
-      }
+      files: {}
     });
+    $scope.gist.files[bitFile] = {};
+    $scope.gist.files[configFile] = {};
 
     $scope.save = function () {
-      $scope.gist.files['bit.md'].content = $scope.content;
-      $scope.gist.files['bitty.json'].content = $scope.stringifyConfig();
+      $scope.gist.files[bitFile].content = $scope.content;
+      $scope.gist.files[configFile].content = $scope.stringifyConfig();
       $scope.gist.public = $scope.config.public;
 
       $scope.gist.$create(function (gist) {
@@ -68,6 +74,7 @@ angular.module('bitty')
     };
   })
   .controller('EditGistCtrl', function ($scope, $state, $stateParams, Gist, alert) {
+    var configFile = $scope.configFilename;
     var firstFile;
 
     Gist.get({
@@ -98,7 +105,7 @@ angular.module('bitty')
       }
 
       Object.keys(gist.files).every(function (file) {
-        if (file !== 'bitty.json') {
+        if (file !== configFile) {
           firstFile = file;
           return false;
         }
@@ -106,20 +113,20 @@ angular.module('bitty')
         return true;
       });
 
-      if (!gist.files['bitty.json']) {
-        gist.files['bitty.json'] = {};
+      if (!gist.files[configFile]) {
+        gist.files[configFile] = {};
       }
 
       $scope.gist = gist;
       $scope.content = gist.files[firstFile].content;
-      if (gist.files['bitty.json'].content) {
-        $scope.$parent.config = JSON.parse(gist.files['bitty.json'].content);
+      if (gist.files[configFile].content) {
+        $scope.$parent.config = JSON.parse(gist.files[configFile].content);
       }
     });
 
     $scope.save = function () {
       $scope.gist.files[firstFile].content = $scope.content;
-      $scope.gist.files['bitty.json'].content = $scope.stringifyConfig();
+      $scope.gist.files[configFile].content = $scope.stringifyConfig();
       $scope.gist.$update(function (gist) {
         $state.go('gist.show', {
           id: gist.id
@@ -128,12 +135,9 @@ angular.module('bitty')
     };
   })
   .controller('ShowGistCtrl', function ($scope, $stateParams, Gist, Comment, layout) {
-    $scope.config = {
-      description: true,
-      comments: false,
-      meta: true,
-      navbar: true
-    };
+    var configFile = $scope.configFilename;
+
+    delete $scope.config['public'];
 
     $scope.comment = new Comment({gistId: $stateParams.id});
 
@@ -147,10 +151,10 @@ angular.module('bitty')
     Gist.get({
       id: $stateParams.id
     }, function (gist) {
-      if (gist.files['bitty.json']) {
+      if (gist.files[configFile]) {
         angular.extend(
-          $scope.config, JSON.parse(gist.files['bitty.json'].content));
-        delete gist.files['bitty.json'];
+          $scope.config, JSON.parse(gist.files[configFile].content));
+        delete gist.files[configFile];
 
         if ($scope.config.comments) {
           $scope.comments = Comment.query({gistId: $stateParams.id});
