@@ -112,7 +112,9 @@ angular.module('bitty')
 
       $scope.gist = gist;
       $scope.content = gist.files[firstFile].content;
-      $scope.$parent.config = JSON.parse(gist.files['bitty.json'].content);
+      if (gist.files['bitty.json'].content) {
+        $scope.$parent.config = JSON.parse(gist.files['bitty.json'].content);
+      }
     });
 
     $scope.save = function () {
