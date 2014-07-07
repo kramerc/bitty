@@ -11,7 +11,7 @@
     <span ng-hide="gist.created_at === gist.updated_at">
       and was last updated <span am-time-ago="gist.updated_at"></span>
     </span>
-    <span ng-show="gist.user.login === currentUser.login">
+    <span ng-show="gist.user && gist.user.login === currentUser.login">
       &mdash; <a ui-sref="gist.editor.edit({id: gist.id})">Edit</a>
     </span>
   </p>
