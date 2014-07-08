@@ -14,42 +14,55 @@
   <!-- endbuild -->
 </head>
 <body ng-class="{editor: layout.editor}">
-  <nav class="navbar navbar-default navbar-static-top" role="navigation" ng-show="layout.navbar">
-    <div ng-class="{container: !layout.fluid, 'container-fluid': layout.fluid}">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-top-navbar-collapse">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" ui-sref="root">Bitty</a>
+  <div class="wrapper">
+    <nav class="navbar navbar-default navbar-static-top" role="navigation" ng-show="layout.navbar">
+      <div ng-class="{container: !layout.fluid, 'container-fluid': layout.fluid}">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-top-navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" ui-sref="root">Bitty</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-top-navbar-collapse">
+          <ul class="nav navbar-nav">
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li ng-if="currentUser">
+              <a href="https://gist.github.com/{{currentUser.login}}">
+                <img class="avatar" ng-src="{{currentUser.avatar_url}}">
+                <span ng-bind="currentUser.login"></span>
+              </a>
+            </li>
+            <li><a ui-sref="gist.editor.new"><span class="octicon octicon-plus"></span> New</a></li>
+            <li><a ng-click="signOut()" ng-if="currentUser"><span class="octicon octicon-sign-out"></span> Sign out</a></li>
+            <li><a ng-click="signIn()" ng-if="!currentUser"><span class="octicon octicon-sign-in"></span> Sign in with GitHub</a></li>
+          </ul>
+        </div>
       </div>
-      <div class="collapse navbar-collapse" id="bs-top-navbar-collapse">
-        <ul class="nav navbar-nav">
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li ng-if="currentUser">
-            <a href="https://gist.github.com/{{currentUser.login}}">
-              <img class="avatar" ng-src="{{currentUser.avatar_url}}">
-              <span ng-bind="currentUser.login"></span>
-            </a>
-          </li>
-          <li><a ui-sref="gist.editor.new"><span class="octicon octicon-plus"></span> New</a></li>
-          <li><a ng-click="signOut()" ng-if="currentUser"><span class="octicon octicon-sign-out"></span> Sign out</a></li>
-          <li><a ng-click="signIn()" ng-if="!currentUser"><span class="octicon octicon-sign-in"></span> Sign in with GitHub</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+    </nav>
 
-  <div ng-class="{container: !layout.fluid, 'container-fluid': layout.fluid}" ng-controller="AlertsCtrl">
-    <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">
-      <span ng-bind="alert.msg"></span>
-    </alert>
+    <div ng-class="{container: !layout.fluid, 'container-fluid': layout.fluid}" ng-controller="AlertsCtrl">
+      <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">
+        <span ng-bind="alert.msg"></span>
+      </alert>
+    </div>
+
+    <div ng-class="{container: !layout.fluid, 'container-fluid': layout.fluid}" ui-view></div>
+
+    <div class="push"></div>
   </div>
 
-  <div ng-class="{container: !layout.fluid, 'container-fluid': layout.fluid}" ui-view></div>
+  <footer>
+    <div ng-class="{container: !layout.fluid, 'container-fluid': layout.fluid}">
+      <p>
+        Bitty &copy; 2014 <a href="http://kramerc.com/">Kramer Campbell</a>.
+        Powered by <a href="https://gist.github.com/">GitHub Gist</a>.
+      </p>
+    </div>
+  </footer>
 
   <!-- build:js assets/app.js -->
   <!-- bower:js -->

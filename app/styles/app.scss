@@ -1,11 +1,15 @@
 @import '../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap';
 
+html {
+  height: 100%;
+}
+
 body.editor {
   > nav {
     margin-bottom: 0;
   }
 
-  > div.container-fluid {
+  div.wrapper > div.container-fluid {
     padding: 0;
     width: 100%;
   }
@@ -44,6 +48,29 @@ body.editor {
       padding: 16px;
       width: 50%;
     }
+  }
+
+  footer {
+    div.container-fluid {
+      margin-top: 0;
+      padding: 8px;
+    }
+  }
+}
+
+body:not(.editor) {
+  height: 100%;
+
+  div.wrapper {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -50px;
+  }
+
+  footer, .push {
+    clear: both;
+    height: 50px;
   }
 }
 
@@ -132,4 +159,17 @@ body.editor {
 
 div.clearfix {
   clear: both;
+}
+
+footer {
+  div.container, div.container-fluid {
+    border-top: 1px solid #CCCCCC;
+    color: #999999;
+    font-size: 12px;
+    padding: 16px 8px;
+
+    p {
+      margin: 0;
+    }
+  }
 }
