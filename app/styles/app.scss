@@ -96,6 +96,15 @@ body:not(.editor) {
   }
 }
 
+div.github-buttons {
+  margin: 1em 0;
+
+  iframe {
+    border: 0;
+    overflow: hidden;
+  }
+}
+
 .navbar.navbar-default {
   img.avatar {
     border-radius: 2px;
