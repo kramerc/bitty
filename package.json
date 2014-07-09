@@ -23,7 +23,7 @@
     "errorhandler": "^1.1.1",
     "express": "^4.4.5",
     "express-session": "^1.6.1",
-    "github": "^0.2.1",
+    "github": "git://github.com/greggman/node-github#add-config-headers",
     "method-override": "^2.0.2",
     "morgan": "^1.1.1",
     "passport": "^0.2.0",
