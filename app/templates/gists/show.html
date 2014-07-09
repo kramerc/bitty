@@ -1,5 +1,5 @@
 <div class="gist">
-  <p ng-show="config.description">{{gist.description}}</p>
+  <p class="description" ng-class="{'navbar-hidden': !config.navbar}" ng-show="config.description">{{gist.description}}</p>
   <div class="markdown" ng-repeat="file in gist.files">
     <div marked-gist></div>
   </div>

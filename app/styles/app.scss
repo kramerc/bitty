@@ -108,6 +108,9 @@ body:not(.editor) {
 }
 
 .gist {
+  .description.navbar-hidden {
+    margin-top: 1em;
+  }
 
   .markdown {
     @include markdown;
