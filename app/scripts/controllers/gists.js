@@ -31,6 +31,8 @@ angular.module('bitty')
       $state.go(newState, {
         user: login,
         id: gist.id
+      }, {
+        location: 'replace'
       });
     });
   })
