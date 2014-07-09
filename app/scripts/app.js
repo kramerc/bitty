@@ -75,6 +75,14 @@ angular.module('bitty', [
 
   $rootScope.layout = layout;
 
+  $rootScope.getCurrentLogin = function () {
+    var login = 'anonymous';
+    if ($rootScope.currentUser) {
+      login = $rootScope.currentUser.login;
+    }
+    return login;
+  };
+
   $rootScope.signIn = function () {
     var authWindow = $window.open(
       '/auth/github', 'AuthWindow', 'dialog=1,location=0,width=1024,height=768');

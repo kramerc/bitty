@@ -94,6 +94,7 @@ angular.module('bitty')
 
       $scope.gist.$create(function (gist) {
         $state.go('gist.show', {
+          user: $scope.getCurrentLogin(),
           id: gist.id
         });
       });
@@ -155,6 +156,7 @@ angular.module('bitty')
       $scope.gist.files[configFile].content = $scope.stringifyConfig();
       $scope.gist.$update(function (gist) {
         $state.go('gist.show', {
+          user: $scope.getCurrentLogin(),
           id: gist.id
         });
       });
