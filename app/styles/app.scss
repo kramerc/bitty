@@ -1,5 +1,25 @@
 @import '../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap';
 
+@mixin markdown {
+  > *:first-child {
+    margin-top: 1em;
+  }
+
+  ul li {
+    margin: 4px 0;
+  }
+
+  ul.task-list {
+    li.task-list-item {
+      list-style-type: none;
+
+      input {
+        margin-left: -19px;
+      }
+    }
+  }
+}
+
 html {
   height: 100%;
 }
@@ -48,19 +68,7 @@ body.editor {
       padding: 16px;
       width: 50%;
 
-      ul li {
-        margin: 4px 0;
-      }
-
-      ul.task-list {
-        li.task-list-item {
-          list-style-type: none;
-
-          input {
-            margin-left: -19px;
-          }
-        }
-      }
+      @include markdown;
     }
   }
 
@@ -100,20 +108,9 @@ body:not(.editor) {
 }
 
 .gist {
+
   .markdown {
-    ul li {
-      margin: 4px 0;
-    }
-
-    ul.task-list {
-      li.task-list-item {
-        list-style-type: none;
-
-        input {
-          margin-left: -19px;
-        }
-      }
-    }
+    @include markdown;
   }
 
   .meta {
@@ -160,6 +157,8 @@ body:not(.editor) {
 
       .body {
         padding: 0 8px;
+
+        @include markdown;
       }
     }
 
