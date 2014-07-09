@@ -165,18 +165,9 @@ angular.module('bitty')
   .controller('ShowGistCtrl', function ($scope, $stateParams, Gist, Comment, layout) {
     var configFile = $scope.configFilename;
 
-    $scope.comment = new Comment({gistId: $stateParams.id});
+    $scope.updating = true;
 
-    $scope.postComment = function () {
-      $scope.comment.$create(function (comment) {
-        $scope.comments.push(comment);
-        $scope.comment = new Comment();
-      });
-    };
-
-    Gist.get({
-      id: $stateParams.id
-    }, function (gist) {
+    function processGist(gist) {
       if (gist.files[configFile]) {
         angular.extend(
           $scope.config, JSON.parse(gist.files[configFile].content));
@@ -191,5 +182,39 @@ angular.module('bitty')
         }
       }
       $scope.gist = gist;
+      $scope.updating = false;
+    }
+
+    $scope.taskListItems = [];
+
+    $scope.comment = new Comment({gistId: $stateParams.id});
+
+    $scope.postComment = function () {
+      $scope.comment.$create(function (comment) {
+        $scope.comments.push(comment);
+        $scope.comment = new Comment();
+      });
+    };
+
+    Gist.get({id: $stateParams.id}, processGist);
+
+    $scope.$watch('taskListItems', function () {
+      var index = 0;
+      var file;
+
+      if ($scope.gist && $scope.taskListItems.length > 0) {
+        $scope.updating = true;
+
+        file = $scope.gist.files[Object.keys($scope.gist.files)[0]];
+        file.content = file.content.replace(/\s*\[[x ]\]\s*/g, function () {
+          if ($scope.taskListItems[index++]) {
+            return ' [x] ';
+          }
+
+          return ' [ ] ';
+        });
+
+        $scope.gist.$update(processGist);
+      }
     });
   });

@@ -1,7 +1,7 @@
 <div class="gist">
   <p ng-show="config.description">{{gist.description}}</p>
   <div class="markdown" ng-repeat="file in gist.files">
-    <div marked="file.content"></div>
+    <div marked-gist></div>
   </div>
 
   <p class="meta" ng-show="config.meta">

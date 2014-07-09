@@ -11,6 +11,8 @@ angular.module('bitty', [
   'ui.router',
   'hc.marked'
 ]).config(function ($locationProvider, $stateProvider, $urlRouterProvider, markedProvider) {
+  var renderer = new marked.Renderer();
+
   $locationProvider.html5Mode(true);
   $urlRouterProvider.otherwise('/');
 
@@ -55,10 +57,31 @@ angular.module('bitty', [
       controller: 'ShowGistCtrl'
     });
 
+  // Add task list support
+  renderer.list = function (body, ordered) {
+    var type = ordered ? 'ol' : 'ul';
+    var list = '<' + type + '>\n' + body + '</' + type + '>\n';
+    if (/<li class="task-list-item">/.test(body)) {
+      list = list.replace('<' + type + '>', '<' + type + ' class="task-list">');
+    }
+    return list;
+  };
+  renderer.listitem = function (text) {
+    if (/^\s*\[[x ]\]\s*/.test(text)) {
+    text = text
+      .replace(/^\s*\[ \]\s*/, '<input type="checkbox" disabled> ')
+      .replace(/^\s*\[x\]\s*/, '<input type="checkbox" checked disabled> ');
+      return '<li class="task-list-item">' + text + '</li>';
+    }
+
+    return '<li>' + text + '</li>';
+  };
+
   markedProvider.setOptions({
     gfm: true,
     tables: true,
     breaks: true,
+    renderer: renderer,
     highlight: function (code) {
       return hljs.highlightAuto(code).value;
     }

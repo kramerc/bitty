@@ -47,6 +47,20 @@ body.editor {
       overflow: auto;
       padding: 16px;
       width: 50%;
+
+      ul li {
+        margin: 4px 0;
+      }
+
+      ul.task-list {
+        li.task-list-item {
+          list-style-type: none;
+
+          input {
+            margin-left: -19px;
+          }
+        }
+      }
     }
   }
 
@@ -89,6 +103,16 @@ body:not(.editor) {
   .markdown {
     ul li {
       margin: 4px 0;
+    }
+
+    ul.task-list {
+      li.task-list-item {
+        list-style-type: none;
+
+        input {
+          margin-left: -19px;
+        }
+      }
     }
   }
 
