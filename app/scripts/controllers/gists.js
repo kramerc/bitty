@@ -8,8 +8,7 @@ angular.module('bitty')
       description: true,
       comments: false,
       meta: true,
-      navbar: true,
-      public: true
+      navbar: true
     };
 
     $scope.config = angular.copy(defaultConfig);
@@ -83,7 +82,8 @@ angular.module('bitty')
     var configFile = $scope.configFilename;
 
     $scope.gist = new Gist({
-      files: {}
+      files: {},
+      public: true
     });
     $scope.gist.files[bitFile] = {};
     $scope.gist.files[configFile] = {};
@@ -91,7 +91,6 @@ angular.module('bitty')
     $scope.save = function () {
       $scope.gist.files[bitFile].content = $scope.content;
       $scope.gist.files[configFile].content = $scope.stringifyConfig();
-      $scope.gist.public = $scope.config.public;
 
       $scope.gist.$create(function (gist) {
         $state.go('gist.show', {
@@ -163,8 +162,6 @@ angular.module('bitty')
   })
   .controller('ShowGistCtrl', function ($scope, $stateParams, Gist, Comment, layout) {
     var configFile = $scope.configFilename;
-
-    delete $scope.config['public'];
 
     $scope.comment = new Comment({gistId: $stateParams.id});
 
