@@ -4,7 +4,7 @@
 
 angular.module('bitty')
   .controller('GistCtrl', function ($scope) {
-    $scope.config = {
+    var defaultConfig = {
       description: true,
       comments: false,
       meta: true,
@@ -12,8 +12,14 @@ angular.module('bitty')
       public: true
     };
 
+    $scope.config = angular.copy(defaultConfig);
+
     $scope.defaultFilename = 'bit.md';
     $scope.configFilename = 'bitty.json';
+
+    $scope.$on('$stateChangeStart', function () {
+      $scope.config = angular.copy(defaultConfig);
+    });
   })
   .controller('GistNoUserCtrl', function ($state, $stateParams, Gist) {
     Gist.get({id: $stateParams.id}, function (gist) {
