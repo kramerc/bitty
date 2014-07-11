@@ -164,6 +164,9 @@ angular.module('bitty')
   })
   .controller('ShowGistCtrl', function ($scope, $stateParams, Gist, Comment, layout) {
     var configFile = $scope.configFilename;
+    var taskListItemRegex = /\s*\[[x ]\]\s*/g;
+    var taskListItemChecked = ' [x] ';
+    var taskListItemUnchecked = ' [ ] ';
 
     $scope.updating = true;
 
@@ -196,6 +199,27 @@ angular.module('bitty')
       });
     };
 
+    $scope.updateComment = function (comment) {
+      var index = 0;
+
+      $scope.updating = true;
+
+      if (comment.taskListItems) {
+        comment.body = comment.body.replace(taskListItemRegex, function () {
+          if (comment.taskListItems[index++]) {
+            return taskListItemChecked;
+          }
+
+          return taskListItemUnchecked;
+        });
+        delete comment.taskListItems;
+      }
+
+      comment.$update({gistId: $stateParams.id}, function () {
+        $scope.updating = false;
+      });
+    };
+
     Gist.get({id: $stateParams.id}, processGist);
 
     $scope.$watch('taskListItems', function () {
@@ -206,12 +230,12 @@ angular.module('bitty')
         $scope.updating = true;
 
         file = $scope.gist.files[Object.keys($scope.gist.files)[0]];
-        file.content = file.content.replace(/\s*\[[x ]\]\s*/g, function () {
+        file.content = file.content.replace(taskListItemRegex, function () {
           if ($scope.taskListItems[index++]) {
-            return ' [x] ';
+            return taskListItemChecked;
           }
 
-          return ' [ ] ';
+          return taskListItemUnchecked;
         });
 
         $scope.gist.$update(processGist);
