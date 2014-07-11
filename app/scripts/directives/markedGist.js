@@ -39,7 +39,10 @@ angular.module('bitty').directive('markedGist', function (marked) {
       }
 
       function parse(val) {
-        element.html(marked(val, {renderer: renderer}));
+        element.html(marked(val, {
+          breaks: false,
+          renderer: renderer
+        }));
 
         taskElements = element.find('.task-list-item input');
         taskElements.bind('change', function () {
