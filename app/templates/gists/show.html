@@ -22,8 +22,21 @@
     <div>
       <a href="https://gist.github.com/{{comment.user.login}}"><img class="avatar" ng-src="{{comment.user.avatar_url}}" alt="{{comment.user.login}}"></a>
       <div class="comment">
-        <div class="meta"><a href="https://gist.github.com/{{comment.user.login}}">{{comment.user.login}}</a> commented <span am-time-ago="comment.created_at"></span></div>
-        <div class="body" marked-comment="comment.body"></div>
+        <div class="meta">
+          <div class="actions" ng-show="comment.user.login === currentUser.login">
+            <a ng-click="editComment(comment)"><span class="octicon octicon-pencil"></span></a>
+            <a ng-click="deleteComment($index)"><span class="octicon octicon-x"></span></a>
+          </div>
+          <a href="https://gist.github.com/{{comment.user.login}}">{{comment.user.login}}</a> commented <span am-time-ago="comment.created_at"></span>
+        </div>
+        <div class="body" marked-comment="comment.body" ng-hide="comment.editing"></div>
+        <div class="edit-body" ng-show="comment.editing">
+          <form role="form">
+            <textarea class="form-control" ng-model="comment.body"></textarea>
+            <button class="btn btn-danger" ng-click="cancelEditComment(comment)">Cancel</button>
+            <button class="btn btn-primary" ng-click="updateComment(comment)" ng-disabled="!comment.body.length">Update Comment</button>
+          </form>
+        </div>
       </div>
       <div class="clearfix"></div>
     </div>

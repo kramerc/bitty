@@ -6,7 +6,8 @@ angular.module('bitty')
       title: 'Are you sure?',
       body: 'Please confirm that you want to this.',
       cancel: 'Cancel',
-      ok: 'OK'
+      ok: 'OK',
+      okClass: 'btn-primary'
     }, confirm);
 
     $scope.cancel = function () {

@@ -162,7 +162,7 @@ angular.module('bitty')
       });
     };
   })
-  .controller('ShowGistCtrl', function ($scope, $stateParams, Gist, Comment, layout) {
+  .controller('ShowGistCtrl', function ($modal, $scope, $stateParams, Gist, Comment, layout) {
     var configFile = $scope.configFilename;
     var taskListItemRegex = /\s*\[[x ]\]\s*/g;
     var taskListItemChecked = ' [x] ';
@@ -192,6 +192,44 @@ angular.module('bitty')
 
     $scope.comment = new Comment({gistId: $stateParams.id});
 
+    $scope.editComment = function (comment) {
+      comment.editing = true;
+      comment.originalBody = angular.copy(comment.body);
+    };
+
+    $scope.cancelEditComment = function (comment) {
+      comment.editing = false;
+      comment.body = comment.originalBody;
+      delete comment.originalBody;
+    };
+
+    $scope.deleteComment = function (index) {
+      var comment = $scope.comments[index];
+
+      $modal.open({
+        templateUrl: 'templates/modals/confirm.html',
+        controller: 'ConfirmCtrl',
+        resolve: {
+          confirm: function () {
+            return {
+              title: 'Are you sure?',
+              body: 'This action cannot be undone.',
+              ok: 'Delete',
+              okClass: 'btn-danger'
+            };
+          }
+        }
+      }).result.then(function () {
+        comment.$delete({
+          gistId: $stateParams.id,
+          id: comment.id
+        }, function () {
+          $scope.comments.splice(index, 1);
+        });
+      });
+
+    };
+
     $scope.postComment = function () {
       $scope.comment.$create(function (comment) {
         $scope.comments.push(comment);
@@ -214,6 +252,8 @@ angular.module('bitty')
         });
         delete comment.taskListItems;
       }
+
+      delete comment.originalBody;
 
       comment.$update({gistId: $stateParams.id}, function () {
         $scope.updating = false;

@@ -170,12 +170,38 @@ div.github-buttons {
             text-decoration: underline;
           }
         }
+
+        .actions {
+          float: right;
+
+          a {
+            color: #999999;
+            cursor: pointer;
+            margin: 0 5px;
+
+            span {
+              cursor: pointer;
+            }
+
+            &:hover {
+              color: #000000;
+            }
+          }
+        }
+      }
+
+      .body, .edit-body {
+        padding: 0 8px;
       }
 
       .body {
-        padding: 0 8px;
-
         @include markdown;
+      }
+
+      .edit-body {
+        .btn-danger {
+          float: left;
+        }
       }
     }
 
