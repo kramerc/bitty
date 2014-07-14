@@ -19,7 +19,14 @@ angular.module('bitty', [
   $stateProvider
     .state('root', {
       url: '/',
-      templateUrl: 'templates/root.html'
+      views: {
+        '': {
+          templateUrl: 'templates/root.html'
+        },
+        'footer@': {
+          templateUrl: 'templates/footers/root.html'
+        }
+      }
     })
     .state('gist', {
       abstract: true,
@@ -55,8 +62,15 @@ angular.module('bitty', [
     })
     .state('gist.show', {
       url: '/:user/:id',
-      templateUrl: 'templates/gists/show.html',
-      controller: 'ShowGistCtrl'
+      views: {
+        '': {
+          controller: 'ShowGistCtrl',
+          templateUrl: 'templates/gists/show.html'
+        },
+        'footer@': {
+          templateUrl: 'templates/footers/gists/show.html'
+        }
+      }
     });
 
   // Add task list support
