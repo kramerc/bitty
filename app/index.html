@@ -17,7 +17,7 @@
 <body ng-class="{editor: layout.editor}">
   <div class="wrapper">
     <nav class="navbar navbar-default navbar-static-top" role="navigation" ng-show="layout.navbar">
-      <div ng-class="{container: !layout.fluid, 'container-fluid': layout.fluid}">
+      <div class="{{layout.containerClass}}">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-top-navbar-collapse">
             <span class="sr-only">Toggle navigation</span>
@@ -45,13 +45,13 @@
       </div>
     </nav>
 
-    <div ng-class="{container: !layout.fluid, 'container-fluid': layout.fluid}" ng-controller="AlertsCtrl">
+    <div class="{{layout.containerClass}}" ng-controller="AlertsCtrl">
       <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">
         <span ng-bind="alert.msg"></span>
       </alert>
     </div>
 
-    <div ng-class="{container: !layout.fluid, 'container-fluid': layout.fluid}" ui-view></div>
+    <div class="{{layout.containerClass}}" ui-view></div>
 
     <div class="push"></div>
   </div>
