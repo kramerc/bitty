@@ -162,7 +162,7 @@ angular.module('bitty')
       });
     };
   })
-  .controller('ShowGistCtrl', function ($modal, $scope, $stateParams, Gist, Comment, layout) {
+  .controller('ShowGistCtrl', function ($document, $modal, $scope, $stateParams, Gist, Comment, layout) {
     var configFile = $scope.configFilename;
     var taskListItemRegex = /\s*\[[x ]\]\s*/g;
     var taskListItemChecked = ' [x] ';
@@ -171,6 +171,8 @@ angular.module('bitty')
     $scope.updating = true;
 
     function processGist(gist) {
+      var title = ' | Bitty';
+
       if (gist.files[configFile]) {
         angular.extend(
           $scope.config, JSON.parse(gist.files[configFile].content));
@@ -184,6 +186,14 @@ angular.module('bitty')
           layout.navbar = false;
         }
       }
+
+      if (gist.description) {
+        title = gist.description + title;
+      } else {
+        title = 'gist:' + gist.id + title;
+      }
+      $document.prop('title', title);
+
       $scope.gist = gist;
       $scope.updating = false;
     }

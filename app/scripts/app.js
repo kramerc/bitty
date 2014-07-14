@@ -35,6 +35,7 @@ angular.module('bitty', [
     })
     .state('gist.editor.new', {
       url: '/new',
+      title: 'New Gist',
       controller: 'NewGistCtrl',
       templateUrl: 'templates/gists/editor.html'
     })
@@ -48,6 +49,7 @@ angular.module('bitty', [
     })
     .state('gist.editor.edit', {
       url: '/:user/:id/edit',
+      title: 'Edit Gist',
       controller: 'EditGistCtrl',
       templateUrl: 'templates/gists/editor.html'
     })
@@ -86,7 +88,7 @@ angular.module('bitty', [
       return hljs.highlightAuto(code).value;
     }
   });
-}).run(function ($rootScope, $http, $timeout, $window, layout) {
+}).run(function ($rootScope, $document, $http, $timeout, $window, layout) {
   function getSession() {
     $http.get('/sessions/info')
       .success(function (user) {
@@ -129,4 +131,11 @@ angular.module('bitty', [
       });
   };
 
+  $rootScope.$on('$stateChangeSuccess', function (event, newState) {
+    var title = 'Bitty';
+    if (newState.title) {
+      title = newState.title + ' | ' + title;
+    }
+    $document.prop('title', title);
+  });
 });
