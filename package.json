@@ -27,7 +27,8 @@
     "method-override": "^2.0.2",
     "morgan": "^1.1.1",
     "passport": "^0.2.0",
-    "passport-github": "^0.1.5"
+    "passport-github": "^0.1.5",
+    "phantomjs": "^1.9.7-14"
   },
   "devDependencies": {
     "connect-livereload": "git://github.com/gadr/connect-livereload#feature/buffered",
