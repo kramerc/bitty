@@ -31,6 +31,7 @@
     "phantomjs": "^1.9.7-14"
   },
   "devDependencies": {
+    "chai": "^1.9.1",
     "connect-livereload": "git://github.com/gadr/connect-livereload#feature/buffered",
     "gulp": "^3.8.5",
     "gulp-bower-files": "^0.2.5",
@@ -41,6 +42,7 @@
     "gulp-jshint": "^1.6.3",
     "gulp-livereload": "^2.1.0",
     "gulp-load-plugins": "^0.5.3",
+    "gulp-mocha": "^0.5.1",
     "gulp-ngmin": "^0.3.0",
     "gulp-nodemon": "^1.0.4",
     "gulp-sass": "^0.7.2",
@@ -48,8 +50,14 @@
     "gulp-useref": "^0.5.0",
     "gulp-util": "^2.2.19",
     "jshint-stylish": "^0.2.0",
+    "karma": "^0.12.17",
+    "karma-mocha": "^0.1.4",
+    "karma-phantomjs-launcher": "^0.1.4",
+    "lodash": "^2.4.1",
+    "mocha": "^1.20.1",
     "node-sass": "^0.9.3",
     "node-sass-middleware": "^0.3.0",
+    "supertest": "^0.13.0",
     "wiredep": "^1.8.1"
   }
 }

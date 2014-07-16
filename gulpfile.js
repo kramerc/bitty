@@ -4,11 +4,14 @@ var gulp = require('gulp');
 var gutil = require('gulp-util');
 var plugins = require('gulp-load-plugins')();
 
+var path = require('path');
+
 var paths = {
   all: {
     scripts: [
       'app/scripts/**/*.js',
       'lib/**/*.js',
+      'test/**/*.js',
       'gulpfile.js',
       'index.js'
     ]
@@ -41,6 +44,12 @@ var paths = {
       dir: 'build/assets'
     }
   },
+  test: {
+    config: 'test/karma.conf.js',
+    server: {
+      glob: ['test/server/**/*.js', '!test/**/helper.js']
+    }
+  },
   tmp: {
     dir: '.tmp',
     styles: {
@@ -50,12 +59,35 @@ var paths = {
   }
 };
 
+function runKarma(options, callback) {
+  var _ = require('lodash');
+  var karma = require('karma').server;
+  var karmaParseConfig = require('karma/lib/config').parseConfig;
+
+  var config = karmaParseConfig(path.resolve(paths.test.config), {});
+
+  if (!callback) {
+    callback = options;
+    options = {};
+  }
+
+  karma.start(_.assign({}, config, options), function (exitCode) {
+    gutil.log('Karma has exited with ' + gutil.colors.red(exitCode));
+    callback();
+    if (exitCode > 0) {
+      process.exit(exitCode);
+    }
+  });
+}
+
 gulp.task('default', ['build']);
 
 gulp.task('build', ['wiredep', 'fonts', 'html', 'jshint'], function () {
   return gulp.src(paths.app.templates.glob, {base: paths.app.dir})
     .pipe(gulp.dest(paths.build.dir));
 });
+
+gulp.task('test', ['test:client', 'test:server']);
 
 gulp.task('heroku:production', ['build']);
 
@@ -92,6 +124,15 @@ gulp.task('styles', function () {
     .pipe(gulp.dest(paths.tmp.styles.dir));
 });
 
+gulp.task('test:client', function (callback) {
+  runKarma({singleRun: true}, callback);
+});
+
+gulp.task('test:server', function () {
+  gulp.src(paths.test.server.glob)
+    .pipe(plugins.mocha());
+});
+
 gulp.task('wiredep', function () {
   var wiredep = require('wiredep').stream;
 
@@ -101,8 +142,6 @@ gulp.task('wiredep', function () {
 });
 
 gulp.task('watch', function () {
-  var path = require('path');
-
   // Start and watch the Express server
   plugins.nodemon({
     script: 'index.js',
