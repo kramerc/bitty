@@ -141,7 +141,9 @@ gulp.task('wiredep', function () {
     .pipe(gulp.dest(paths.app.dir));
 });
 
-gulp.task('watch', function () {
+gulp.task('watch', ['watch:test', 'watch:serve']);
+
+gulp.task('watch:serve', function () {
   // Start and watch the Express server
   plugins.nodemon({
     script: 'index.js',
@@ -164,4 +166,18 @@ gulp.task('watch', function () {
   });
   gulp.watch(paths.app.styles.glob, ['styles']);
   gulp.watch(paths.bower.json, ['wiredep']);
+});
+
+gulp.task('watch:test', function (callback) {
+  var backend = paths.all.scripts;
+  backend.shift();
+
+  runKarma(callback);
+  gulp.watch(backend, function () {
+    gulp.src(paths.test.server.glob)
+      .pipe(plugins.mocha())
+      .on('error', function (err) {
+        console.error(err.message);
+      });
+  });
 });
