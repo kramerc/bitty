@@ -168,11 +168,13 @@ gulp.task('watch:serve', function () {
   gulp.watch(paths.bower.json, ['wiredep']);
 });
 
-gulp.task('watch:test', function (callback) {
+gulp.task('watch:test', function () {
   var backend = paths.all.scripts;
   backend.shift();
 
-  runKarma(callback);
+  runKarma(function () {
+    process.exit(0);
+  });
   gulp.watch(backend, function () {
     gulp.src(paths.test.server.glob)
       .pipe(plugins.mocha())
