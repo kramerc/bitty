@@ -4,18 +4,18 @@
   "private": true,
   "license": "MIT",
   "dependencies": {
-    "bootstrap-sass-official": "~3.2.0",
-    "angular": "~1.2.19",
-    "angular-marked": "~0.0.12",
-    "angular-moment": "~0.7.1",
-    "angular-resource": "~1.2.19",
-    "angular-sanitize": "~1.2.19",
-    "angular-ui-ace": "~0.1.1",
-    "angular-ui-bootstrap-bower": "~0.11.0",
-    "angular-ui-router": "~0.2.10",
-    "highlightjs": "~8.0.0",
-    "marked": "~0.3.2",
-    "octicons": "~2.1.0"
+    "bootstrap-sass-official": "3.2.0",
+    "angular": "1.2.19",
+    "angular-marked": "0.0.12",
+    "angular-moment": "0.7.1",
+    "angular-resource": "1.2.19",
+    "angular-sanitize": "1.2.19",
+    "angular-ui-ace": "0.1.1",
+    "angular-ui-bootstrap-bower": "0.11.0",
+    "angular-ui-router": "0.2.10",
+    "highlightjs": "8.0.0",
+    "marked": "0.3.2",
+    "octicons": "2.1.0"
   },
   "overrides": {
     "ace-builds": {
