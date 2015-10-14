@@ -46,6 +46,10 @@ angular.module('bitty')
     layout.fluid = true;
     layout.navbar = false;
 
+    $scope.file = {
+      content: ''
+    };
+
     $scope.back = function () {
       $window.history.back();
     };

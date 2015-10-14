@@ -1,3 +1,2 @@
-<div ui-ace="{mode: 'markdown', onChange: aceChanged, onLoad: aceLoaded, showGutter: false, useWrapMode: true}" ng-model="content" resize="{offset: {height: 50}}" ng-style="{height: height}"></div>
-<div class="preview" marked="content" resize="{offset: {height: 50}}" ng-style="{height: height}"></div>
-
+<div ui-ace="{mode: 'markdown', onChange: aceChanged, onLoad: aceLoaded, showGutter: false, useWrapMode: true}" ng-model="file.content" ng-change='contentChange()' resize="{offset: {height: 50}}" ng-style="{height: height}"></div>
+<div marked-gist class="preview" resize="{offset: {height: 50}}" ng-style="{height: height}"></div>

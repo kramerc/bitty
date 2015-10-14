@@ -5,6 +5,7 @@ angular.module('bitty').directive('markedGist', function (marked) {
     restrict: 'AE',
     replace: true,
     scope: false,
+    template: '<div ng-bind-html="markedContent"></div>',
     link: function (scope, element) {
       var taskElements;
 
@@ -18,9 +19,9 @@ angular.module('bitty').directive('markedGist', function (marked) {
       }
 
       function parse(val) {
-        element.html(marked(val, {
+        scope.markedContent = marked(val, {
           breaks: false
-        }));
+        });
 
         taskElements = element.find('.task-list-item input');
         taskElements.bind('change', function () {
