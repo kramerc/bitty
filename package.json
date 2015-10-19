@@ -16,6 +16,9 @@
     "url": "https://github.com/kramerc/bitty/issues"
   },
   "homepage": "https://github.com/kramerc/bitty",
+  "engines": {
+    "node": ">=0.10.0 <=0.12.7"
+  },
   "dependencies": {
     "body-parser": "^1.4.3",
     "connect-redis": "^2.0.0",
