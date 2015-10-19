@@ -83,10 +83,7 @@ angular.module('bitty', [
     return list;
   };
   renderer.listitem = function (text) {
-    if (/^\s*\[[x ]\]\s*/.test(text)) {
-      text = text
-        .replace(/^\s*\[ \]\s*/, '<input type="checkbox" disabled> ')
-        .replace(/^\s*\[x\]\s*/, '<input type="checkbox" checked disabled> ');
+    if (/^\s*\[[Xx ]\]\s*/.test(text)) {
       return '<li class="task-list-item">' + text + '</li>';
     }
 
