@@ -1,7 +1,7 @@
 <div class="gist">
   <p class="description" ng-class="{'navbar-hidden': !config.navbar}" ng-show="config.description">{{gist.description}}</p>
   <div class="markdown" ng-repeat="file in gist.files">
-    <div marked-gist></div>
+    <div marked-content="file.content" content-owner="gist" task-list-updated="gistTaskListUpdated(taskListItems)"></div>
   </div>
 
   <p class="meta" ng-show="config.meta">
@@ -29,7 +29,7 @@
           </div>
           <a href="https://gist.github.com/{{comment.user.login}}">{{comment.user.login}}</a> commented <span am-time-ago="comment.created_at"></span>
         </div>
-        <div class="body" marked-comment="comment.body" ng-hide="comment.editing"></div>
+        <div class="body" marked-content="comment.body" content-owner="comment" task-list-updated="updateComment(comment)" ng-hide="comment.editing"></div>
         <div class="edit-body" ng-show="comment.editing">
           <form role="form">
             <textarea class="form-control" ng-model="comment.body"></textarea>

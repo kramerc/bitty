@@ -4,6 +4,10 @@ angular.module('bitty')
   .directive('editorBox', function ($location, $modal, $window) {
     return {
       restrict: 'AE',
+      scope: {
+        gist: '=',
+        bitFile: '='
+      },
       link: function (scope, element) {
         var confirmMsg = 'You will lose any unsaved changes.';
         var popping = false;
