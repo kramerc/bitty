@@ -29,7 +29,7 @@
           </div>
           <a href="https://gist.github.com/{{comment.user.login}}">{{comment.user.login}}</a> commented <span am-time-ago="comment.created_at"></span>
         </div>
-        <div class="body" marked-content="comment.body" content-owner="comment" task-list-updated="updateComment(comment)" ng-hide="comment.editing"></div>
+        <div class="body" marked-content="comment.body" content-owner="comment" comment-format="true" task-list-updated="updateComment(comment)" ng-hide="comment.editing"></div>
         <div class="edit-body" ng-show="comment.editing">
           <form role="form">
             <textarea class="form-control" ng-model="comment.body"></textarea>

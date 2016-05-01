@@ -9,11 +9,19 @@ angular.module('bitty').directive('markedContent', function ($rootScope, $saniti
     scope: {
       content: '=markedContent',
       contentOwner: '=contentOwner',
+      commentFormat: '=?',
       taskListUpdated: '&'
     },
     template: '<div ng-bind-html="markedContent"></div>',
     link: function (scope, element) {
       var taskElements = null;
+
+      // Comments are parsed slightly different
+      var commentLexer = new marked.Lexer();
+      // Deep copy the rules object so that these changes don't affect the rules
+      // on the other lexers. https://github.com/chjj/marked/issues/745
+      commentLexer.rules = angular.copy(commentLexer.rules);
+      commentLexer.rules.heading = /^ *(#{1,6} ) *([^\n]+?) *#* *(?:\n+|$)/;
 
       function enableDisableItems() {
         if (taskElements === null) {
@@ -35,9 +43,13 @@ angular.module('bitty').directive('markedContent', function ($rootScope, $saniti
 
         var taskListItemRegex = /<li class="task-list-item">.*<\/li>/g;
 
-        scope.markedContent = $sanitize(marked(val, {
-          breaks: false
-        }));
+        if (!scope.commentFormat) {
+          scope.markedContent = $sanitize(marked(val, {
+            breaks: false
+          }));
+        } else {
+          scope.markedContent = $sanitize(marked.parser(commentLexer.lex(val)));
+        }
 
         // Add inputs to task list items
         var items = scope.markedContent.match(taskListItemRegex);
